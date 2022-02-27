@@ -54,7 +54,7 @@ export default async function (_: VercelRequest, res: VercelResponse) {
   } else {
     word = await wordleWord();
     if (word !== '') {
-      cache.set(cacheKey, word, 43200 * 1000); //expiry in 12h
+      cache.set(cacheKey, word, (1000 * 60) * 60); //expires in 1hour
     }
   }
   res.send(`Worlde hari ini adalah: <strong>${word}</strong>`);
