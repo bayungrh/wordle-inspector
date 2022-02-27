@@ -25,7 +25,7 @@ async function wordleWord(): Promise<string> {
   await page.goto('https://www.nytimes.com/games/wordle/index.html');
   // const cookies = await page.cookies();
 
-  // await page.waitForTimeout( 10000 );
+  // await page.waitForTimeout(10000);
   const localStorageData = await page.evaluate(() => {
     let json = {};
     for (let i = 0; i < localStorage.length; i++) {
