@@ -45,11 +45,13 @@ async function wordleWord(): Promise<string> {
   return '';
 }
 
-export default async function (_: VercelRequest, res: VercelResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   let word = '';
+  const forceCache = req.query.forceCache;
   const cacheKey = 'WORDLE:WORD';
   const cacheValue = cache.get(cacheKey);
-  if (cacheValue) {
+
+  if (cacheValue && forceCache !== 'true') {
     word = cacheValue;
   } else {
     word = await wordleWord();
