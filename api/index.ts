@@ -1,3 +1,4 @@
+process.env.TZ = 'Asia/Jakarta';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import simpcache from 'simpcache';
 import chrome from 'chrome-aws-lambda';
@@ -21,8 +22,11 @@ async function wordleWord(): Promise<string> {
           : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
       };
   const browser = await puppeteer.launch(options);
-  const page = await browser.newPage();
+  const context = await browser.createIncognitoBrowserContext();
+  const page = await context.newPage();
   await page.goto('https://www.nytimes.com/games/wordle/index.html');
+  await page.setCacheEnabled(false);
+  await page.reload({ waitUntil: 'networkidle2' });
   // const cookies = await page.cookies();
 
   // await page.waitForTimeout(10000);
@@ -59,5 +63,5 @@ export default async function (req: VercelRequest, res: VercelResponse) {
       cache.set(cacheKey, word, (1000 * 60) * 60); //expires in 1hour
     }
   }
-  res.send(`Worlde hari ini adalah: <strong>${word}</strong>`);
+  res.send(`<label style="font-size: 17pt;">Today's Wordle is:</label> <h1>:: ${word} ::</h1>`);
 };
