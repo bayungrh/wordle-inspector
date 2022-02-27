@@ -1,0 +1,18 @@
+{
+  "name": "worlde-inspector",
+  "version": "0.0.1",
+  "main": "*.ts",
+  "author": "bayungrh",
+  "engines": {
+    "node": "12.x"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^13.4.0",
+    "simpcache": "^1.0.4"
+  },
+  "devDependencies": {
+    "@vercel/node": "^1.13.0"
+  }
+}
